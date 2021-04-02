@@ -1,11 +1,11 @@
 import sys
 
-from Del.parser.nodes import Node, BinaryNode, UnaryNode
-from Del.parser.parser import Parser
-from Del.lexer.lexer import Lexer
-from Del.lexer.tokens import *
-from Del.lexer.mathFunctions import *
-from Del.lexer.lexicalToken import LexicalToken
+from delta.parser.nodes import Node, BinaryNode, UnaryNode
+from delta.parser.parser import Parser
+from delta.lexer.lexer import Lexer
+from delta.lexer.tokens import *
+from delta.lexer.mathFunctions import *
+from delta.lexer.lexicalToken import LexicalToken
 
 
 class Expression:
@@ -228,7 +228,6 @@ class Expression:
     @staticmethod
     def differentiate(expression: "Expression", wrt: LexicalToken = LexicalToken(TT_SYMBOL, 'x'),
                       nth_derivative: int = 1, fold: bool = True):
-
         head = expression.head_node
         for _ in range(nth_derivative):
             head = Expression.__differentiate(head, wrt)

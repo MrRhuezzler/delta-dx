@@ -20,11 +20,14 @@ class Lexer:
             self.curr_char = self.expression[self.pos.idx]
 
     def make_tokens(self):
-        while self.curr_char:
-            if self.curr_char.isdigit():
-                self.tokens.append(self.make_digits())
-            if self.curr_char.isalpha():
-                self.tokens.append(self.make_identifiers())
+        # while self.curr_char:
+
+        #     if self.curr_char.isdigit():
+        #         self.tokens.append(self.make_digits())
+        #     elif self.curr_char.isalpha():
+        #         self.tokens.append(self.make_identifiers())
+        #     # else:
+        #     self.advance()
 
         return self.tokens
 
@@ -40,7 +43,7 @@ class Lexer:
     def make_digits(self):
         number = ""
         decimal = 0
-        while self.curr_char and (self.curr_char.isdigit() or self.curr_char is '.'):
+        while self.curr_char and (self.curr_char.isdigit() or self.curr_char == '.'):
             if self.curr_char == '.':
                 if decimal == 1:
                     break

@@ -1,4 +1,4 @@
-from Del.lexer.lexicalToken import LexicalToken
+from delta.lexer.lexicalToken import LexicalToken
 
 
 class Node:

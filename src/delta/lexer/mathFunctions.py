@@ -1,9 +1,9 @@
 import math
 
 from .function import Function
-from Del.parser.nodes import Node, BinaryNode, UnaryNode
-from Del.lexer.lexicalToken import LexicalToken
-from Del.lexer.tokens import *
+from delta.parser.nodes import Node, BinaryNode, UnaryNode
+from delta.lexer.lexicalToken import LexicalToken
+from delta.lexer.tokens import *
 
 
 # d(log(a, u)) / dx = (1 / (log(a) * u)) * du / dx
