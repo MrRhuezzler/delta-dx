@@ -9,6 +9,9 @@ class NumericalConstants:
         self.value = value
         NumericalConstants.constants.append(self)
 
+    def __repr__(self) -> str:
+        return f"({self.symbol}:{self.value})"
+
     def __eq__(self, other):
         if isinstance(other, str):
             return self.symbol == other
@@ -28,6 +31,9 @@ class SymbolicConstants:
     def __init__(self, symbol):
         self.symbol = symbol
         SymbolicConstants.constants.append(self)
+
+    def __repr__(self) -> str:
+        return f"{self.symbol}"
 
     def __eq__(self, other):
         if isinstance(other, str):

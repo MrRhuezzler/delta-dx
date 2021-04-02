@@ -1,8 +1,13 @@
-from typing import Optional
+from typing import Final, Optional
+
+from delta.lexer.function import Function
+from delta.lexer.mathFunctions import *
+from .constants import NumericalConstants, SymbolicConstants
 
 from .position import Position
-from .lexicalToken import LexicalToken
 from .tokens import *
+from .lexicalToken import LexicalToken
+from .errors import InvalidIdentifier
 
 
 class Lexer:
@@ -14,20 +19,53 @@ class Lexer:
         self.advance()
 
     def advance(self):
-        if self.pos.idx > len(self.expression):
+        self.pos.advance()
+        if self.pos.idx >= len(self.expression):
             self.curr_char = None
         else:
             self.curr_char = self.expression[self.pos.idx]
 
     def make_tokens(self):
-        # while self.curr_char:
+        while self.curr_char:
 
-        #     if self.curr_char.isdigit():
-        #         self.tokens.append(self.make_digits())
-        #     elif self.curr_char.isalpha():
-        #         self.tokens.append(self.make_identifiers())
-        #     # else:
-        #     self.advance()
+            if self.curr_char in ' \n\t':
+                self.advance()
+            
+            # Operators
+            elif self.curr_char == '+':
+                self.tokens.append(LexicalToken(TT_PLUS))
+                self.advance()
+            elif self.curr_char == '-':
+                self.tokens.append(LexicalToken(TT_MINUS))
+                self.advance()
+            elif self.curr_char == '*':
+                self.tokens.append(LexicalToken(TT_MULTIPLY))
+                self.advance()
+            elif self.curr_char == '/':
+                self.tokens.append(LexicalToken(TT_DIVIDE))
+                self.advance()
+            elif self.curr_char == '^':
+                self.tokens.append(LexicalToken(TT_EXPONENT))
+                self.advance()
+
+            # Parenthesis
+            elif self.curr_char == ')':
+                self.tokens.append(LexicalToken(TT_RPAREN))
+                self.advance()
+            elif self.curr_char == '(':
+                self.tokens.append(LexicalToken(TT_LPAREN))
+                self.advance()
+
+            # Numerical Constants, Symbolic Constants, Identifiers
+            elif self.curr_char.isdigit():
+                self.tokens.append(self.make_digits())
+            elif self.curr_char.isalpha():
+                start_pos = Position.copy(self.pos)
+                ident = self.make_identifiers()
+                if isinstance(ident, LexicalToken):
+                    self.tokens.append(ident)
+                else:
+                    raise Exception(InvalidIdentifier(start_pos, self.pos, ident ))
 
         return self.tokens
 
@@ -37,8 +75,19 @@ class Lexer:
             identifier += self.curr_char
             self.advance()
 
-        if len(identifier) == 1:
-            return
+        constant = NumericalConstants.get_constant(identifier)
+        if constant:
+            return LexicalToken(TT_REAL, constant)
+        
+        constant = SymbolicConstants.get_constant(identifier)
+        if constant:
+            return LexicalToken(TT_SYMBOL, constant)
+        
+        func = Function.get_function(identifier)
+        if func:
+            return LexicalToken(TT_FUNC, func)
+
+        return identifier
 
     def make_digits(self):
         number = ""

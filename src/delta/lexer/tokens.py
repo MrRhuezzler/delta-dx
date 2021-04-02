@@ -14,7 +14,7 @@ TT_FUNC = TokenType('FUNCTION')
 TT_PLUS = TokenType('PLUS', '+')
 TT_MINUS = TokenType('MINUS', '-')
 TT_DIVIDE = TokenType('DIVIDE', '/')
-TT_MULTIPLY = TokenType('MULTIPLY', '.')
+TT_MULTIPLY = TokenType('MULTIPLY', '*')
 TT_EXPONENT = TokenType('EXPONENT', '^')
 
 # Mathematical Expression Operators
