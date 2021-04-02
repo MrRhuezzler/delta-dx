@@ -1,11 +1,11 @@
 import sys
 
-from differentiator.parser.nodes import Node, BinaryNode, UnaryNode
-from differentiator.parser.parser import Parser
-from differentiator.lexer.lexer import Lexer
-from differentiator.lexer.tokens import *
-from differentiator.lexer.mathFunctions import *
-from differentiator.lexer.lexicalToken import LexicalToken
+from Del.parser.nodes import Node, BinaryNode, UnaryNode
+from Del.parser.parser import Parser
+from Del.lexer.lexer import Lexer
+from Del.lexer.tokens import *
+from Del.lexer.mathFunctions import *
+from Del.lexer.lexicalToken import LexicalToken
 
 
 class Expression:
@@ -189,8 +189,15 @@ class Expression:
                 return BinaryNode(LexicalToken(TT_MULTIPLY), a_u_log_a, du)
 
             # d(u ^ c) / dx =  c * u ^ (c - 1) * du / dx
-            elif c.lexical_token == TT_INT or c.lexical_token == TT_REAL:
-                u_c_1 = BinaryNode(LexicalToken(TT_EXPONENT), u, Node(LexicalToken(TT_INT, c.lexical_token.value - 1)))
+            elif c.lexical_token == TT_INT or c.lexical_token == TT_REAL or c.lexical_token == TT_SYMBOL:
+                if c.lexical_token == wrt:
+                    return node
+
+                if c.lexical_token == TT_SYMBOL:
+                    u_c_1 = BinaryNode(LexicalToken(TT_EXPONENT), u, Node(LexicalToken(TT_INT, str(c.lexical_token.value) + "-1")))
+                else:
+                    u_c_1 = BinaryNode(LexicalToken(TT_EXPONENT), u, Node(LexicalToken(TT_INT, c.lexical_token.value - 1)))
+
                 c_u_c_1 = BinaryNode(LexicalToken(TT_MULTIPLY), c, u_c_1)
                 du = Expression.__differentiate(u, wrt)
                 return BinaryNode(LexicalToken(TT_MULTIPLY), c_u_c_1, du)

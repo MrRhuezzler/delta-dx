@@ -1,9 +1,9 @@
 import math
 
 from .function import Function
-from differentiator.parser.nodes import Node, BinaryNode, UnaryNode
-from differentiator.lexer.lexicalToken import LexicalToken
-from differentiator.lexer.tokens import *
+from Del.parser.nodes import Node, BinaryNode, UnaryNode
+from Del.lexer.lexicalToken import LexicalToken
+from Del.lexer.tokens import *
 
 
 # d(log(a, u)) / dx = (1 / (log(a) * u)) * du / dx
@@ -100,7 +100,7 @@ def arccos_d(node):
 # d(arctan u) / dx = (1 / (1 + u ^ 2)) * du / dx
 def arctan_d(node):
     u = node.right_child
-    u_2 = BinaryNode(LexicalToken(TT_EXPONENT),u, Node(LexicalToken(TT_INT, 2)))
+    u_2 = BinaryNode(LexicalToken(TT_EXPONENT), u, Node(LexicalToken(TT_INT, 2)))
     _1_u_2 = BinaryNode(LexicalToken(TT_PLUS), Node(LexicalToken(TT_INT, 1)), u_2)
     _1_v = BinaryNode(LexicalToken(TT_DIVIDE), Node(LexicalToken(TT_INT, 1)), _1_u_2)
     return BinaryNode(LexicalToken(TT_MULTIPLY), _1_v)

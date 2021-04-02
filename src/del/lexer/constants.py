@@ -1,3 +1,6 @@
+import math
+
+
 class NumericalConstants:
     constants = []
 
@@ -37,3 +40,15 @@ class SymbolicConstants:
             if constant == symbol:
                 return constant
         return None
+
+
+e = NumericalConstants('e', math.e)
+pi = NumericalConstants('pi', math.pi)
+
+x = SymbolicConstants('x')
+y = SymbolicConstants('y')
+z = SymbolicConstants('z')
+w = SymbolicConstants('w')
+v = SymbolicConstants('v')
+u = SymbolicConstants('u')
+n = SymbolicConstants('n')
