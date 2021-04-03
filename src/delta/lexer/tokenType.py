@@ -6,6 +6,9 @@ class TokenType:
         self.token_name = token_name
         self.token_symbol = token_symbol
 
+    def __hash__(self) -> int:
+        return self.token_symbol.__hash__()
+
     def __eq__(self, other: "TokenType"):
         return other.token_name == self.token_name and other.token_symbol == self.token_symbol
 

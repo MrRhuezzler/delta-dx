@@ -55,6 +55,14 @@ class Lexer:
             elif self.curr_char == '(':
                 self.tokens.append(LexicalToken(TT_LPAREN))
                 self.advance()
+            
+            # Curlies
+            elif self.curr_char == '}':
+                self.tokens.append(LexicalToken(TT_RCURLY))
+                self.advance()
+            elif self.curr_char == '{':
+                self.tokens.append(LexicalToken(TT_LCURLY))
+                self.advance()
 
             # Numerical Constants, Symbolic Constants, Identifiers
             elif self.curr_char.isdigit():
@@ -66,6 +74,12 @@ class Lexer:
                     self.tokens.append(ident)
                 else:
                     raise Exception(InvalidIdentifier(start_pos, self.pos, ident ))
+
+            else:
+                start_pos = Position.copy(self.pos)
+                char = self.curr_char
+                self.advance()
+                raise Exception(InvalidIdentifier(start_pos, self.pos, char))
 
         return self.tokens
 
