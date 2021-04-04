@@ -1,4 +1,4 @@
-from typing import Final, Optional
+from typing import Optional
 
 from delta.lexer.function import Function
 from delta.lexer.mathFunctions import *
@@ -30,7 +30,12 @@ class Lexer:
 
             if self.curr_char in ' \n\t':
                 self.advance()
-            
+
+            # Comma
+            elif self.curr_char == ',':
+                self.tokens.append(LexicalToken(TT_COMMA))
+                self.advance()
+
             # Operators
             elif self.curr_char == '+':
                 self.tokens.append(LexicalToken(TT_PLUS))
@@ -55,7 +60,7 @@ class Lexer:
             elif self.curr_char == '(':
                 self.tokens.append(LexicalToken(TT_LPAREN))
                 self.advance()
-            
+
             # Curlies
             elif self.curr_char == '}':
                 self.tokens.append(LexicalToken(TT_RCURLY))
@@ -81,6 +86,18 @@ class Lexer:
                 self.advance()
                 raise Exception(InvalidIdentifier(start_pos, self.pos, char))
 
+
+        # Chaging ln to log e
+        did_change = False
+        for i in  range(len(self.tokens)):
+            if self.tokens[i] == LexicalToken(TT_FUNC, LN):
+                self.tokens[i] = LexicalToken(TT_FUNC, LOG)
+                did_change = True
+                break
+
+        if did_change:
+            self.tokens.insert(i + 1, LexicalToken(TT_REAL, NumericalConstants.get_constant('e')))
+
         return self.tokens
 
     def make_identifiers(self):
@@ -92,11 +109,11 @@ class Lexer:
         constant = NumericalConstants.get_constant(identifier)
         if constant:
             return LexicalToken(TT_REAL, constant)
-        
+
         constant = SymbolicConstants.get_constant(identifier)
         if constant:
             return LexicalToken(TT_SYMBOL, constant)
-        
+
         func = Function.get_function(identifier)
         if func:
             return LexicalToken(TT_FUNC, func)

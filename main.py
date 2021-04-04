@@ -10,6 +10,9 @@ from delta.parser.parser import Parser
 # e_x_log_x = BinaryNode(LexicalToken(TT_MULTIPLY), e_x, log_x)
 # head = BinaryNode(LexicalToken(TT_MULTIPLY), Node(LexicalToken(TT_SYMBOL, 'x')), e_x_log_x)
 
-l = Lexer("(x * e ^ x) * log{5, (2 + x) * 5}")
-p = Parser(l.make_tokens())
-print(p.make_nodes())
+la = Lexer("(x * e ^ x) * (ln {5} + sin{7 * y})")
+lb = Lexer("(x * e ^ x) * (log 5 {5} + sin{7 * y}) * cos{9 * u}")
+pa = Parser(la.make_tokens())
+pb = Parser(lb.make_tokens())
+print(pa.make_nodes())
+print(pb.make_nodes())

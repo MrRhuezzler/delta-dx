@@ -158,6 +158,8 @@ def sqrt_f(node):
 
 
 LOG = Function('log', log_d, log_f)
+LN = Function('ln')
+
 SQRT = Function('sqrt', sqrt_d, sqrt_f)
 
 COS = Function('cos', cos_d)

@@ -4,7 +4,7 @@ from typing import Callable
 class Function:
     functions = []
 
-    def __init__(self, function_name: str, derivative_func: Callable, fold_func: Callable = lambda x: x):
+    def __init__(self, function_name: str, derivative_func: Callable = lambda x: x, fold_func: Callable = lambda x: x):
         self.function_name = function_name
         self.derivative_func = derivative_func
         self.fold_func = fold_func

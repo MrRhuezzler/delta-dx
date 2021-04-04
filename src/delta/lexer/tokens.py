@@ -22,3 +22,5 @@ TT_LPAREN = TokenType('LPAREN', '(')
 TT_RPAREN = TokenType('RPAREN', ')')
 TT_LCURLY = TokenType('LCURLY', '{')
 TT_RCURLY = TokenType('RCURLY', '}')
+
+TT_COMMA  = TokenType('COMMA', '","')
