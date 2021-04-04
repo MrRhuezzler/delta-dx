@@ -11,9 +11,9 @@ setuptools.setup(
     description="A Python Symbolic Differentiation",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/MrRhuezzler/delta",
+    url="https://github.com/MrRhuezzler/delta-dx",
     project_urls={
-        "Bug Tracker": "https://github.com/MrRhuezzler/delta/issues",
+        "Bug Tracker": "https://github.com/MrRhuezzler/delta-dx/issues",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
