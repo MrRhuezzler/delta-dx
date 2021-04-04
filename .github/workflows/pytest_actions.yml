@@ -1,9 +1,10 @@
-name: Run Python Tests
-on: 
-  'push'
+name: pytests
+on: push
 
 jobs:
   build:
+    name: Run pytest
+    if: "contains(github.event.head_commit.message, 'pytest')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,5 +17,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest delta-dx
       - name: Run tests with pytest
-        if: "contains(github.event.head_commit.message, 'pytest')"
         run: pytest
