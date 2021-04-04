@@ -38,7 +38,13 @@ class Expression:
                 Expression.__inorder_traversal(node.left_child, string)
 
             if isinstance(node, UnaryNode) or isinstance(node, BinaryNode):
+                if node.lexical_token == TT_FUNC:
+                    string.append('{')
+                
                 Expression.__inorder_traversal(node.right_child, string)
+
+                if node.lexical_token == TT_FUNC:
+                    string.append('}')
 
             if not (node.lexical_token == TT_INT or node.lexical_token == TT_SYMBOL):
                 string.append(')')
@@ -184,7 +190,7 @@ class Expression:
             # d(a ^ u) / dx = a ^ u * log(a) * du / dx
             if u.lexical_token == TT_INT or u.lexical_token == TT_REAL:
                 a_u = BinaryNode(LexicalToken(TT_EXPONENT), u, c)
-                log_a = BinaryNode(LexicalToken(TT_FUNC, LOG), Node(LexicalToken(TT_REAL, 'e')), u)
+                log_a = BinaryNode(LexicalToken(TT_FUNC, LOG), Node(LexicalToken(TT_REAL, NumericalConstants.get_constant('e'))), u)
                 a_u_log_a = BinaryNode(LexicalToken(TT_MULTIPLY), a_u, log_a)
                 du = Expression.__differentiate(c, wrt)
                 return BinaryNode(LexicalToken(TT_MULTIPLY), a_u_log_a, du)

@@ -1,5 +1,7 @@
 import math
 
+from delta.lexer.constants import NumericalConstants
+
 from .function import Function
 from delta.parser.nodes import Node, BinaryNode, UnaryNode
 from delta.lexer.lexicalToken import LexicalToken
@@ -10,7 +12,7 @@ from delta.lexer.tokens import *
 def log_d(node):
     a = node.left_child
     u = node.right_child
-    log_a = BinaryNode(LexicalToken(TT_FUNC, LOG), Node(LexicalToken(TT_REAL, 'e')), a)
+    log_a = BinaryNode(LexicalToken(TT_FUNC, LOG), Node(LexicalToken(TT_REAL, NumericalConstants.get_constant('e'))), a)
     log_a_u = BinaryNode(LexicalToken(TT_MULTIPLY), log_a, u)
     _1_log_a_u = BinaryNode(LexicalToken(TT_DIVIDE), Node(LexicalToken(TT_INT, 1)), log_a_u)
     return BinaryNode(LexicalToken(TT_MULTIPLY), _1_log_a_u)

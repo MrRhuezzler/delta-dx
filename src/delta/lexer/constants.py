@@ -10,11 +10,14 @@ class NumericalConstants:
         NumericalConstants.constants.append(self)
 
     def __repr__(self) -> str:
-        return f"({self.symbol}:{self.value})"
+        return f"{self.symbol}"
 
     def __eq__(self, other):
         if isinstance(other, str):
             return self.symbol == other
+        if isinstance(other, NumericalConstants):
+            return self.symbol == other.symbol
+            
         return False
 
     @staticmethod

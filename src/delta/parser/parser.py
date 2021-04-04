@@ -1,8 +1,10 @@
-from typing import List
+from typing import List, Text
+from delta.lexer.mathFunctions import LOG
 
 from delta.lexer.tokens import *
 from delta.lexer.lexicalToken import LexicalToken
 from .errors import InvalidExpression
+from .nodes import BinaryNode, UnaryNode, Node
 
 class Parser:
 
@@ -14,6 +16,10 @@ class Parser:
             TT_EXPONENT : 4,
             TT_FUNC : 5,
         }
+    
+    binary_nodes = [TT_PLUS, TT_MINUS, TT_DIVIDE, TT_MULTIPLY, TT_EXPONENT]
+    unary_nodes = [TT_FUNC]
+    nodes = [TT_REAL, TT_INT, TT_SYMBOL]
 
     def __init__(self, lexical_tokens: list):
         self.tokens = lexical_tokens
@@ -79,6 +85,25 @@ class Parser:
             return Parser.__postfix(tokens)[::-1]
         raise Exception(InvalidExpression(f"Check for balance of brackets : {error}"))
 
+    @staticmethod
+    def __make_nodes(tokens):
+        elem = tokens.pop(0)
+        if elem in Parser.nodes:
+            return Node(elem)
+        else:
+            if elem in Parser.binary_nodes or elem == LexicalToken(TT_FUNC, LOG):
+                left = Parser.__make_nodes(tokens)
+
+            if elem in Parser.unary_nodes or elem in Parser.binary_nodes:
+                right = Parser.__make_nodes(tokens)
+
+        if elem in Parser.binary_nodes or elem == LexicalToken(TT_FUNC, LOG):
+            return BinaryNode(elem, left, right)
+
+        if elem in Parser.unary_nodes:
+            return UnaryNode(elem, right)
 
     def make_nodes(self):
-        return Parser.__prefix(self.tokens)
+        prefix_expr = Parser.__prefix(self.tokens)
+        self.head = Parser.__make_nodes(prefix_expr)
+        return self.head
