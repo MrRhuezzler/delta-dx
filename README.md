@@ -1,9 +1,10 @@
 ![delta-dx](/images/cover.png)
 ---
-[![Publish to PyPI](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml/badge.svg)](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml) [![Run Python Tests](https://github.com/MrRhuezzler/delta/actions/workflows/pytest_actions.yml/badge.svg)](https://github.com/MrRhuezzler/delta/actions/workflows/pytest_actions.yml)  
+[![Publish to PyPI](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml/badge.svg)](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml)
+[![Run Python Tests](https://github.com/MrRhuezzler/delta/actions/workflows/pytest_actions.yml/badge.svg)](https://github.com/MrRhuezzler/delta/actions/workflows/pytest_actions.yml)  
 
 Author           : [MrRhuezzler](https://github.com/MrRhuezzler)  
-Project Language : Python 
+Project Language : Python  
 Project Year     : 2021  
 
 ## How to Install
