@@ -9,7 +9,7 @@ Project Year     : 2021
 
 ## How to Install
 This currently avaiable on the pypi indexing, from where it can be installed  using the following command.  
-(Note : pip, python must be added to the PATH for this command to work)
+(Note : pip and python must be added to the PATH for this command to work)
 ```
 pip install delta-dx
 ```
