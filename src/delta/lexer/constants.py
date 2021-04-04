@@ -53,6 +53,7 @@ class SymbolicConstants:
 
 e = NumericalConstants('e', math.e)
 pi = NumericalConstants('pi', math.pi)
+tau = NumericalConstants('ta', math.tau)
 
 x = SymbolicConstants('x')
 y = SymbolicConstants('y')

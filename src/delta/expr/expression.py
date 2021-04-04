@@ -5,7 +5,7 @@ from delta.parser.parser import Parser
 from delta.lexer.lexer import Lexer
 from delta.lexer.tokens import *
 from delta.lexer.mathFunctions import *
-from delta.lexer.constants import SymbolicConstants, NumericalConstants
+from delta.lexer.constants import NumericalConstants
 from delta.lexer.lexicalToken import LexicalToken
 
 
