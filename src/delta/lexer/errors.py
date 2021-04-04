@@ -1,4 +1,4 @@
-class Error:
+class Error(Exception):
     def __init__(self, typ, start_pos, end_pos, details) -> None:
         self.typ = typ
         self.details = details

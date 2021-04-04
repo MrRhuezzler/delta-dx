@@ -65,13 +65,13 @@ class Lexer:
                 if isinstance(ident, LexicalToken):
                     self.tokens.append(ident)
                 else:
-                    raise Exception(InvalidIdentifier(start_pos, self.pos, ident ))
+                    raise InvalidIdentifier(start_pos, self.pos, ident )
 
             else:
                 start_pos = Position.copy(self.pos)
                 char = self.curr_char
                 self.advance()
-                raise Exception(InvalidIdentifier(start_pos, self.pos, char))
+                raise InvalidIdentifier(start_pos, self.pos, char)
 
         return self.tokens
 

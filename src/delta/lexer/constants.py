@@ -41,6 +41,9 @@ class SymbolicConstants:
     def __eq__(self, other):
         if isinstance(other, str):
             return self.symbol == other
+        if isinstance(other, SymbolicConstants):
+            return self.symbol == other.symbol
+            
         return False
 
     @staticmethod
