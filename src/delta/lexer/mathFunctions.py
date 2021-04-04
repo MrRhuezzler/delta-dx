@@ -159,8 +159,7 @@ def sqrt_f(node):
     return node
 
 
-LOG = Function('log', log_d, log_f)
-LN = Function('ln')
+LOG = Function('log', log_d, log_f, 1)
 
 SQRT = Function('sqrt', sqrt_d, sqrt_f)
 

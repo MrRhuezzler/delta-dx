@@ -28,12 +28,11 @@ class Parser:
     @staticmethod
     def __balanceOfBrackets(tokens):
         stack = []
-        brackets_mapping = {TT_RCURLY : TT_LCURLY, TT_RPAREN : TT_LPAREN}
         for i in range(len(tokens)):
-            if tokens[i] in [TT_LPAREN, TT_LCURLY]:
+            if tokens[i] == TT_LPAREN:
                 stack.append((tokens[i], i))
-            elif tokens[i] in [TT_RCURLY, TT_RPAREN]:
-                if stack and stack[-1][0] == brackets_mapping[tokens[i].token_type]:
+            elif tokens[i] == TT_RPAREN:
+                if stack and stack[-1][0] == TT_LPAREN:
                     stack.pop()
                 else:
                     return False, (tokens[i], i)
@@ -44,14 +43,13 @@ class Parser:
     def __postfix(tokens: List[LexicalToken]):
         postfix_expr = []
         stack = []
-        brackets_mapping = {TT_RCURLY : TT_LCURLY, TT_RPAREN : TT_LPAREN}
         for token in tokens:
-            if token in [TT_SYMBOL, TT_INT, TT_REAL, TT_COMMA]:
+            if token in [TT_SYMBOL, TT_INT, TT_REAL]:
                 postfix_expr.append(token)
-            elif token in [TT_LPAREN, TT_LCURLY]:
+            elif token in [TT_LPAREN]:
                 stack.append(token)
-            elif token in [TT_RPAREN, TT_RCURLY]:
-                while stack and stack[-1] != brackets_mapping[token.token_type]:
+            elif token in [TT_RPAREN]:
+                while stack and stack[-1] != TT_LPAREN:
                     postfix_expr.append(stack.pop())
 
                 if stack:
@@ -77,11 +75,7 @@ class Parser:
                     tokens[i] = LexicalToken(TT_RPAREN)
                 elif tokens[i] == TT_RPAREN:
                     tokens[i] = LexicalToken(TT_LPAREN)
-                
-                if tokens[i] == TT_RCURLY:
-                    tokens[i] = LexicalToken(TT_LCURLY)
-                elif tokens[i] == TT_LCURLY:
-                    tokens[i] = LexicalToken(TT_RCURLY)
+
             return Parser.__postfix(tokens)[::-1]
         raise Exception(InvalidExpression(f"Check for balance of brackets : {error}"))
 
@@ -91,17 +85,20 @@ class Parser:
         if elem in Parser.nodes:
             return Node(elem)
         else:
-            if elem in Parser.binary_nodes or elem == LexicalToken(TT_FUNC, LOG):
+            if elem in Parser.binary_nodes or (elem == TT_FUNC and elem.value.isbinary):
                 left = Parser.__make_nodes(tokens)
 
             if elem in Parser.unary_nodes or elem in Parser.binary_nodes:
                 right = Parser.__make_nodes(tokens)
 
-        if elem in Parser.binary_nodes or elem == LexicalToken(TT_FUNC, LOG):
+        if elem in Parser.binary_nodes or (elem == TT_FUNC and elem.value.isbinary):
             return BinaryNode(elem, left, right)
 
         if elem in Parser.unary_nodes:
             return UnaryNode(elem, right)
+
+    def prefix(self):
+        return Parser.__prefix(self.tokens)
 
     def make_nodes(self):
         prefix_expr = Parser.__prefix(self.tokens)

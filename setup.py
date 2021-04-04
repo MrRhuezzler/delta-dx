@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="delta-mrrhuezzler", # Replace with your own username
+    name="delta-dx",
     version="0.0.1",
     author="MrRhuezzler",
     author_email="anonymouspyro369@gmail.com",
@@ -17,6 +17,7 @@ setuptools.setup(
     },
     classifiers=[
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],

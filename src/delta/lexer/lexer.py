@@ -31,11 +31,6 @@ class Lexer:
             if self.curr_char in ' \n\t':
                 self.advance()
 
-            # Comma
-            elif self.curr_char == ',':
-                self.tokens.append(LexicalToken(TT_COMMA))
-                self.advance()
-
             # Operators
             elif self.curr_char == '+':
                 self.tokens.append(LexicalToken(TT_PLUS))
@@ -61,14 +56,6 @@ class Lexer:
                 self.tokens.append(LexicalToken(TT_LPAREN))
                 self.advance()
 
-            # Curlies
-            elif self.curr_char == '}':
-                self.tokens.append(LexicalToken(TT_RCURLY))
-                self.advance()
-            elif self.curr_char == '{':
-                self.tokens.append(LexicalToken(TT_LCURLY))
-                self.advance()
-
             # Numerical Constants, Symbolic Constants, Identifiers
             elif self.curr_char.isdigit():
                 self.tokens.append(self.make_digits())
@@ -85,18 +72,6 @@ class Lexer:
                 char = self.curr_char
                 self.advance()
                 raise Exception(InvalidIdentifier(start_pos, self.pos, char))
-
-
-        # Chaging ln to log e
-        did_change = False
-        for i in  range(len(self.tokens)):
-            if self.tokens[i] == LexicalToken(TT_FUNC, LN):
-                self.tokens[i] = LexicalToken(TT_FUNC, LOG)
-                did_change = True
-                break
-
-        if did_change:
-            self.tokens.insert(i + 1, LexicalToken(TT_REAL, NumericalConstants.get_constant('e')))
 
         return self.tokens
 

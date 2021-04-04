@@ -39,12 +39,12 @@ class Expression:
 
             if isinstance(node, UnaryNode) or isinstance(node, BinaryNode):
                 if node.lexical_token == TT_FUNC:
-                    string.append('{')
+                    string.append('(')
                 
                 Expression.__inorder_traversal(node.right_child, string)
 
                 if node.lexical_token == TT_FUNC:
-                    string.append('}')
+                    string.append(')')
 
             if not (node.lexical_token == TT_INT or node.lexical_token == TT_SYMBOL):
                 string.append(')')
