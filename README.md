@@ -1,2 +1,2 @@
 # Del
-A Python Symbolic Differentiator
+A Python Symbolic Differentiator.
