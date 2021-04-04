@@ -5,10 +5,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="delta-dx",
-    version="0.0.4",
+    version="0.0.1",
     author="MrRhuezzler",
     author_email="anonymouspyro369@gmail.com",
-    description="A Python Symbolic Differentiation",
+    description="A Symbolic Differentiator",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/MrRhuezzler/delta-dx",
