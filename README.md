@@ -16,7 +16,7 @@ pip install delta-dx
 ## Usage
 
 ```python
-from delta.expr.expression import Expression
+from delta import Expression
 ex = Expression("x * e ^ x")
-print(Expression.differentiate(ex))
+print(Expression.differentiate(ex, nth_derivative=1))
 ```

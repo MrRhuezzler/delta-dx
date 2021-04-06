@@ -1,4 +1,3 @@
-from delta.expr.expression import Expression
-
-l = Expression('log 10(cos(5 * x))')
-print(Expression.differentiate(l))
+from delta import Expression
+ex = Expression("x * e ^ x")
+print(Expression.differentiate(ex, nth_derivative=1))
