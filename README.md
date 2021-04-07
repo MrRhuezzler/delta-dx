@@ -1,6 +1,7 @@
 ![delta-dx](https://github.com/MrRhuezzler/delta-dx/blob/main/images/d_cover.png)
 ---
-[![Publish to PyPI](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml/badge.svg)](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml)
+[![PYPI Version](https://img.shields.io/pypi/v/delta-dx.svg)](https://pypi.org/project/delta-dx/)
+[![Publish to PYPI](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml/badge.svg)](https://github.com/MrRhuezzler/delta/actions/workflows/python-publish.yml)
 [![Run Python Tests](https://github.com/MrRhuezzler/delta/actions/workflows/pytest_actions.yml/badge.svg)](https://github.com/MrRhuezzler/delta/actions/workflows/pytest_actions.yml)  
 
 Author           : [MrRhuezzler](https://github.com/MrRhuezzler)  
