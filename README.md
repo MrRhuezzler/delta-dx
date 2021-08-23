@@ -94,3 +94,8 @@ Expression Tree
 Now we are done with the differentiating algorithm.
 
 The Next steps may be to simplify the output of the differentiating algorithm, so that it looks neat and simple, rather than having more additional terms in the final output expression. Such an expression folding algorithm is also implemented to fold into smaller expressions. And with some basic mathematics an algorithm was devised. It is not the most optimal solution for the problem. I learnt many things in making this package.
+
+## Resources
+- [The D* Symbolic Differentiation Algorithm](https://www.microsoft.com/en-us/research/publication/the-d-symbolic-differentiation-algorithm/) | Author : [Brian Guenter](https://www.microsoft.com/en-us/research/people/bguenter/) | Year : 2007
+- [A Webpage of the University of Texas at Austin](https://www.cs.utexas.edu/users/novak/asg-symdif.html) (Primary Inspiration for developing this package)
+- [A Webpage of MIT Press](https://mitpress.mit.edu/sites/default/files/sicp/full-text/sicp/book/node39.html) (Served as a quick reference material)
