@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="delta-dx",
-    version="0.1.1",
+    version="0.1.2",
     author="MrRhuezzler",
     author_email="anonymouspyro369@gmail.com",
     description="A Symbolic Differentiator",
