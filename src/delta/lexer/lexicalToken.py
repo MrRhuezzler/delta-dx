@@ -6,6 +6,8 @@ class LexicalToken:
     def __init__(self, token_type: TokenType, value: Any = None):
         self.token_type = token_type
         self.value = value
+        self.token_name = token_type.token_name
+        self.token_symbol = token_type.token_symbol
 
     def __eq__(self, other):
         if isinstance(other, LexicalToken):
